@@ -1,0 +1,220 @@
+\documentclass{article}
+
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
+\usepackage{thmtools}
+\usepackage{graphicx}
+\usepackage{setspace}
+\usepackage{geometry}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{framed}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{tcolorbox}
+
+\colorlet{LightGray}{White!90!Periwinkle}
+\colorlet{LightOrange}{Orange!15}
+\colorlet{LightGreen}{Green!15}
+
+\newcommand{\HRule}[1]{\rule{\linewidth}{#1}}
+
+\declaretheoremstyle[name=Theorem,]{thmsty}
+\declaretheorem[style=thmsty,numberwithin=section]{theorem}
+\tcolorboxenvironment{theorem}{colback=LightGray}
+
+\declaretheoremstyle[name=Proposition,]{prosty}
+\declaretheorem[style=prosty,numberlike=theorem]{proposition}
+\tcolorboxenvironment{proposition}{colback=LightOrange}
+
+\declaretheoremstyle[name=Principle,]{prcpsty}
+\declaretheorem[style=prcpsty,numberlike=theorem]{principle}
+\tcolorboxenvironment{principle}{colback=LightGreen}
+
+\setstretch{1.2}
+\geometry{
+    textheight=9in,
+    textwidth=5.5in,
+    top=1in,
+    headheight=12pt,
+    headsep=25pt,
+    footskip=30pt
+}
+
+% ------------------------------------------------------------------------------
+
+\begin{document}
+
+% ------------------------------------------------------------------------------
+% Cover Page and ToC
+% ------------------------------------------------------------------------------
+
+\title{ \normalsize \textsc{}
+		\\ [2.0cm]
+		\HRule{1.5pt} \\
+		\LARGE \textbf{\uppercase{Relatório do trabalho\\ Pet shop}
+		\HRule{2.0pt} \\ [0.6cm] \LARGE{Ferramentas da Internet} \vspace*{10\baselineskip}}
+		}
+\date{}
+\author{\textbf{Autores:} \\
+		Clarice Cabrini\\
+		Hillary Carla\\
+            Lara Silva\\
+            Maria Eduarda\\
+            Sarah Luiza\\
+		22/04/2025}
+
+\maketitle
+\newpage
+
+% ------------------------------------------------------------------------------
+
+\section{Introdução}
+O Pet Shop oferece uma variedade de serviços, dentre eles banho, consulta, vacinação, tratamentos diversos e vendas. Eles são caracterizados por tipo, descrição, valor base e duração estimada. O banho é diferenciado por tosa, a consulta por data e hora, relatório, diagnóstico e prescrição de remédios, a vacinação por peso e a aplicação de remédio por alergias. A venda é diferenciada por código de venda, forma de pagamento, valor total e funcionário responsável e distribui produtos, dentre eles rações, brinquedos, acessórios e medicamentos. Eles possuem código, nome, descrição, preço, categoria e validade. A Ração é destacada por marca, brinquedo por tipo de animal, acessório por porte do animal e pelagem e medicamentos por alergia e peso do animal. Os produtos são fornecidos por fornecedores que possuem CNPJ, razão social e telefone. Os funcionários executam os serviços e são divididos entre banhista, veterinário e atendente. Sua identificação é dada por código único, nome, telefone, cargo e salário. Os banhistas são caracterizados também por nível de experiência, veterinário por CRM e atendente por CPF. Os clientes realizam compras ou agendam serviços previamente ou por demanda, contendo data e hora, status, animal a ser atendido e funcionário. Suas informações são: nome, CPF, e-mail, telefone, data de nascimento e endereço.  Cada um desses clientes possuem um ou mais animais de estimação e os animais possuem obrigatoriamente um dono. Cada animal possui código de cadastro, nome, espécie, raça, idade, sexo e peso. O sistema, caracterizado por data de atendimentos, lucro e feedbacks, registra os animais, pagamentos e as compras. Cada compra é registrada por código, data, valor total e atendente responsável. O pagamento pode ser realizado por dinheiro, pix ou cartão que, se necessário, informa parcelamentos.
+
+\newpage
+
+\section{Descrição dos relacionamentos}
+
+Registra (Pagamento – Sistema) 
+
+Semântica: O sistema registra todos os pagamentos realizados. 
+
+Cardinalidade: Um-para-muitos (um sistema pode registrar vários pagamentos, mas cada pagamento é registrado em apenas um sistema). 
+
+Participação: Parcial para Sistema (um sistema pode existir sem registrar pagamentos). 
+
+Participação: Total para Pagamento (todo pagamento deve ser registrado no sistema). 
+
+Registra (Sistema – Animal) 
+
+Semântica: O sistema registra informações dos animais cadastrados. 
+
+Cardinalidade: Um-para-muitos (um sistema pode registrar vários animais, mas cada animal é registrado em apenas um sistema). 
+
+Participação: Parcial para Sistema (um sistema pode existir sem registrar animais). 
+
+Participação: Total para Animal (todo animal precisa estar registrado no sistema). 
+
+Registra (Sistema – Compra) 
+
+Semântica: O sistema registra todas as compras realizadas. 
+
+Cardinalidade: Um-para-muitos (um sistema pode registrar várias compras, mas cada compra é registrada em apenas um sistema). 
+
+Participação: Parcial para Sistema (um sistema pode existir sem registrar compras). 
+
+Participação: Total para Compra (toda compra precisa estar registrada no sistema). 
+
+Faz (Cliente – Compra) 
+
+Semântica: O cliente realiza compras no sistema. 
+
+Cardinalidade: Um-para-muitos (um cliente pode realizar várias compras, mas cada compra é feita por apenas um cliente). 
+
+Participação: Parcial para Cliente (nem todo cliente realiza compras). 
+
+Participação: Total para Compra (toda compra deve ser feita por um cliente). 
+
+Possui (Cliente – Animal) 
+
+Semântica: O cliente possui animais cadastrados no sistema. 
+
+Cardinalidade: Um-para-muitos (um cliente pode possuir vários animais, mas cada animal pertence a apenas um cliente). 
+
+Participação: Parcial para Cliente (nem todo cliente possui animais). 
+
+Participação: Total para Animal (todo animal deve pertencer a um cliente). 
+
+Agenda (Cliente – Serviço) 
+
+Semântica: O cliente agenda serviços para seus animais. 
+
+Cardinalidade: Muitos-para-muitos (um cliente pode agendar vários serviços, e um serviço pode ser agendado por vários clientes). 
+
+Participação: Parcial para Cliente (nem todo cliente agenda serviços). 
+
+Participação: Parcial para Serviço (nem todo serviço é agendado por clientes). 
+
+Executa (Funcionário – Serviço) 
+
+Semântica: O funcionário executa os serviços agendados. 
+
+Cardinalidade: Muitos-para-muitos (um funcionário pode executar vários serviços, e um serviço pode ser executado por vários funcionários). 
+
+Participação: Parcial para Funcionário (nem todo funcionário executa serviços). 
+
+Participação: Total para Serviço (todo serviço precisa ser executado por pelo menos um funcionário). 
+
+Distribui (Serviço – Venda) 
+
+Semântica: A venda está associada à distribuição de serviços realizados. 
+
+Cardinalidade: Um-para-muitos (um serviço pode originar várias vendas, mas cada venda pertence a apenas um serviço). 
+
+Participação: Parcial para Serviço (nem todo serviço gera venda). 
+
+Participação: Total para Venda (toda venda deve estar ligada a um serviço). 
+
+Fornece (Fornecedor – Produto) 
+
+Semântica: O fornecedor fornece produtos para o sistema. 
+
+Cardinalidade: Um-para-muitos (um fornecedor pode fornecer vários produtos, mas cada produto é fornecido por apenas um fornecedor). 
+
+Participação: Parcial para Fornecedor (nem todo fornecedor fornece produtos no sistema). 
+
+Participação: Total para Produto (todo produto precisa ter um fornecedor). 
+\begin{figure}
+
+\section{Dicionário de Entidades}
+
+    \centering
+    \includegraphics[width=1\linewidth]{pag1.pdf}
+    \caption{Dicionário de entidades}
+    \label{fig:placeholder}
+\end{figure}
+
+\begin{figure}
+
+\section{Dicionário de Entidades}
+
+    \centering
+    \includegraphics[width=1\linewidth]{pag2.pdf}
+    \caption{Dicionário de entidades}
+    \label{fig:placeholder}
+\end{figure}
+
+\begin{figure}
+
+\section{Dicionário de Entidades}
+
+    \centering
+    \includegraphics[width=1\linewidth]{pag3.pdf}
+    \caption{Dicionário de entidades}
+    \label{fig:placeholder}
+\end{figure}
+
+\begin{figure}
+
+\section{Dicionário de Entidades}
+
+    \centering
+    \includegraphics[width=1\linewidth]{pag5.pdf}
+    \caption{Dicionário de entidades}
+    \label{fig:placeholder}
+\end{figure}
+
+
+\begin{figure}
+\section{Diagrama}
+    \centering
+    \includegraphics[width=1\linewidth]{novo didi 2.png}
+    \caption{Figura - Diagrama Pet Shop}
+    \label{fig:placeholder}
+\end{figure}
+
+
+
+
+\end{document}
